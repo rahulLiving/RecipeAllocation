@@ -36,7 +36,7 @@ There are two different algorithms implemented for the pipeline.
 
 Make sure the `JSON` files are placed in the `data` folder
 **execution**
-`python --o orders.json --s stock.json main.py`
+`python -p ../data/ -o orders.json -s stock.json main.py`
 
 **p.s** Prints the boolean value representing if the constraints in the problems are met or not. **True** for constraints being satisfied
 **False** otherwise
