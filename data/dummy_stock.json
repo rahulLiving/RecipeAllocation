@@ -1,0 +1,19 @@
+{
+  "recipe_1": {
+    "stock_count": 100
+  },
+  "recipe_2": {
+    "stock_count": 100
+  },
+  "recipe_3": {
+    "stock_count": 100
+  },
+  "recipe_4": {
+    "stock_count": 100
+  },
+
+  "recipe_5": {
+    "stock_count": 100,
+    "stock_location":"London"
+  }
+}

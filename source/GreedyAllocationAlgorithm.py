@@ -1,7 +1,8 @@
 from source.AlgorithmInterface import AlgorithmInterface
 import heapq
+from heapq import heappush, heappop
 import logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 class GreedyAllocationAlgorithm(AlgorithmInterface):
@@ -9,54 +10,59 @@ class GreedyAllocationAlgorithm(AlgorithmInterface):
     def __init__(self, orders=None, stocks=None):
         if orders == None or stocks == None:
             raise ValueError('Stocks or Orders cannot be empty!')
-        self.__orders = orders
-        self.__stocks = stocks
+        self.orders = orders
+        self.stocks = stocks
 
     def prelim_check(self):
         total_orders = 0
-        for order in self.__orders:
+        for order in self.orders:
             total_orders += order.order_count
 
         total_stock = 0
-        for stock in self.__stocks:
+        for stock in self.stocks:
             total_stock += stock.portions
 
-        return total_orders > total_stock
+        return total_orders < total_stock
 
     def print_remaining_stocks(self, stocks):
-        logger.debug('---Remaining Stocks---')
+        logger.info('---Remaining Stocks---')
         while stocks:
             stock = stocks.pop()
-            logger.debug(stock)
-        logger.debug('---xxx---')
+            logger.info(stock)
+        logger.info('---xxx---')
 
     def print_remaining_orders(self, orders):
-        logger.debug('---Remaining Orders---')
+        logger.info('---Remaining Orders---')
         while orders:
             order = orders.pop()
-            logger.debug(order)
-        logger.debug('---xxx---')
+            logger.info(order)
+        logger.info('---xxx---')
 
 
     def output(self):
         if not self.prelim_check():
             return False
 
-        orders_max_pq = heapq._heapify_max(self.__orders)
-        stocks_max_pq = heapq._heapify_max(self.__stocks)
+
+        orders_max_pq = self.orders
+        stocks_max_pq = self.stocks
+
+        heapq.heapify(orders_max_pq)
+        heapq.heapify(stocks_max_pq)
 
         try:
             while orders_max_pq:
-                order = orders_max_pq.pop()
+                order = heappop(orders_max_pq)
                 recipes = []
                 for i in range(order.number_of_recipes):
-                    recipe_in_stock = stocks_max_pq.pop()
-                    recipes.append(recipe_in_stock.reduce_portions(order.number_of_portions))
+                    recipe_in_stock = heappop(stocks_max_pq)
+                    recipe_in_stock.reduce_portions(order.number_of_portions)
+                    recipes.append(recipe_in_stock)
                 order.reduce_order_count(1)
                 for recipe in recipes:
-                    stocks_max_pq.push(recipe)
+                    heappush(stocks_max_pq,recipe)
                 if order.order_count > 0:
-                    stocks_max_pq.push(order)
+                    heappush(orders_max_pq,order)
 
         except Exception as e:
             logger.debug(e)

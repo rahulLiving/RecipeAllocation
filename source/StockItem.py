@@ -18,7 +18,7 @@ class StockItem:
         :return: None
         """
         if self.portions - reduce_by < 0:
-            raise ValueError('Amount of the recipe %s in stock is not sufficient. Available %d'%(self.name,self.portions))
+            raise ValueError('Amount of the recipe %s in stock is not sufficient. Available %d and asked for %d'%(self.name,self.portions,reduce_by))
         self.portions = self.portions - reduce_by
 
     @property
@@ -41,7 +41,7 @@ class StockItem:
         return "Name:%s Portions:%d" % (self.name, self.portions)
 
     def __lt__(self, other):
-        return self.portions  < other.portions
+        return self.portions > other.portions
 
     def __eq__(self, other):
         return self.portions == other.portions

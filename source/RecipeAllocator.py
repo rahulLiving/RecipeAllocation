@@ -3,6 +3,9 @@ import os
 from source.Order import  Order
 from source.StockItem import StockItem
 from source.GreedyAllocationAlgorithm import  GreedyAllocationAlgorithm
+import logging
+logging.basicConfig(level=logging.ERROR)
+logger = logging.getLogger(__name__)
 
 class RecipeAllocator:
     def __init__(self,path_to_data='../data/',orders_file='orders.json',stock_file='stock.json'):
@@ -28,7 +31,12 @@ class RecipeAllocator:
         with open(self.__path_to_stock) as f:
             json_data = json.load(f)
         for recipe, stock_count in json_data.items():
-            self.__stocks.append(StockItem(name=recipe, portions=stock_count['stock_count']))
+            try:
+                self.__stocks.append(StockItem(name=recipe, portions=stock_count['stock_count']))
+            except Exception as e:
+                logger.error(e)
+                continue
+
 
 
     def __load_orders(self):
@@ -37,13 +45,14 @@ class RecipeAllocator:
             json_data = json.load(f)
         for number_of_recipes, order_portions in json_data.items():
             for portion_name, portion_number in order_portions.items():
-                self.__orders.append(Order(number_of_recipes=number_of_recipes, number_of_portions=portion_name,
+                try:
+                    self.__orders.append(Order(number_of_recipes=number_of_recipes, number_of_portions=portion_name,
                                            order_count=portion_number))
-
+                except Exception as e:
+                    logger.error(e)
+                    continue
 
     def compute(self):
         algorithm = GreedyAllocationAlgorithm(orders=self.orders,stocks=self.stocks)
-        print(algorithm.output())
+        return algorithm.output()
 
-recipeAllocator = RecipeAllocator()
-recipeAllocator.compute()

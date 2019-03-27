@@ -40,10 +40,10 @@ class Order:
         return "Recipes:%d Portions:%d Count:%d" % (self.number_of_recipes, self.number_of_portions, self.order_count)
 
     def __lt__(self, other):
-        return self.order_count * self.number_of_portions < other.order_count * other.number_of_portions
+        return self.number_of_recipes > other.number_of_recipes
 
     def __eq__(self, other):
-        return self.order_count * self.number_of_portions == other.order_count * other.number_of_portions
+        return self.number_of_recipes == other.number_of_recipes
 
     def __gt__(self, other):
-        return self.order_count * self.number_of_portions > other.order_count * other.number_of_portions
+        return self.number_of_recipes < other.number_of_recipes

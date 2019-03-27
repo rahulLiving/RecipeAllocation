@@ -31,5 +31,5 @@ class StringToValueGenerator:
         try:
             value = StringToValueGenerator.__instance.string_to_value_mapping[string_query]
         except:
-            raise KeyError('%s value doesnot exist in the map'%(string_query))
+            raise KeyError('%s value does not exist in the map'%(string_query))
         return value

@@ -2,6 +2,7 @@ import abc
 
 
 class AlgorithmInterface(metaclass=abc.ABCMeta):
+
     @abc.abstractmethod
     def output(self): raise NotImplementedError
 
