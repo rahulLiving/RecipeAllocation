@@ -4,8 +4,8 @@
 
 1. [Introduction](#introduction)
 2. [Algorithm](#algorithm)
-3. [Project Structure](#project structure)
-4. [How To Run](#how to run)
+3. [Project Structure](#project-structure)
+4. [How To Run](#how-to-run)
 
 
 ### Introduction
