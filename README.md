@@ -41,18 +41,25 @@ In order to the project. We need to set up the docker which ensures the consiste
 ##### Setting up the docker
 Firstly, navigate to the `$ROOT` of the project. The proejct structre at `$ROOT` is displayed above(#project-structure)
 Execute the command
+
 `docker built -t recipe_allocation .`
+
 This builds the image. Next, we need to run the image
+
 `docker run -it recipe_allocation`
+
 This will cause the miniconda3 enivronment inside the terminal to change to `env`. We can now execute the code 
 
 ##### Executing the application
 
 Make sure the `JSON` files are placed in the `data` folder
+
 **execution**
+
 `python -p ./data/ -o orders.json -s stock.json main.py`
 
 **help**
+
 `python -h main.py`
 
 **p.s** Prints the boolean value representing if the constraints in the problems are met or not. **True** for constraints being satisfied
