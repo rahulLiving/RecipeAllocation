@@ -39,18 +39,18 @@ Greedy Allocation: Utilizes the recipes for which the stock is maximum. The deta
 In order to the project. We need to set up the docker which ensures the consistency of the project across platforms. After the docker is set up we utilize `python` to run the `main.py`
 
 ##### Setting up the docker
-Firstly, navigate to the `$ROOT` of the project. The proejct structre at `$ROOT` is displayed [above](#project-structure)
+Firstly, navigate to the `$ROOT` of the project. The project structre at `$ROOT` is displayed [above](#project-structure)
 
 Execute the command
 
 `docker built -t recipe_allocation .`
 
-This builds the image. Next, we need to run the image
+This builds the image. Next, we need to run the image inside the container by
 
 `docker run -it recipe_allocation`
 
-This will cause the miniconda3 enivronment inside the terminal to change to `env`. We can now execute the code 
-
+This will start a container and execute the image. The miniconda3 enivronment will change from `base` to `env` with python3.6 installed.
+We are ready to execute the project.
 ##### Executing the application
 
 Make sure the `JSON` files are placed in the `data` folder
