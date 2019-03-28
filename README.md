@@ -39,7 +39,8 @@ Greedy Allocation: Utilizes the recipes for which the stock is maximum. The deta
 In order to the project. We need to set up the docker which ensures the consistency of the project across platforms. After the docker is set up we utilize `python` to run the `main.py`
 
 ##### Setting up the docker
-Firstly, navigate to the `$ROOT` of the project. The proejct structre at `$ROOT` is displayed above(#project-structure)
+Firstly, navigate to the `$ROOT` of the project. The proejct structre at `$ROOT` is displayed [above](#project-structure)
+
 Execute the command
 
 `docker built -t recipe_allocation .`
